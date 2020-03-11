@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace StashTabSharp
 {
@@ -10,7 +11,11 @@ namespace StashTabSharp
     {
         public bool IsStreaming { get; }
 
-        public IAsyncEnumerable<StashChange> StartDataStream(string id = "", CancellationToken token = default(CancellationToken));
+        Task<string> GetNextChangeIdAsync();
+
+        Task<StashData> GetAsync(string changeId = "", CancellationToken cancellationToken = default(CancellationToken));
+
+        public IAsyncEnumerable<StashData> GetAsyncDataStream(string changeId = "", CancellationToken cancellationToken = default(CancellationToken));
 
         public void StopDataStream();
     }

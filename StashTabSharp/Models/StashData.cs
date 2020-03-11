@@ -5,12 +5,15 @@ using System.Text.Json.Serialization;
 
 namespace StashTabSharp.Models
 {
-    public class StashChange
+    public class StashData
     {
         [JsonPropertyName("next_change_id")]
         public string NextChangeId { get; set; }
 
         [JsonPropertyName("stashes")]
         public IEnumerable<Stash> Stashes { get; set; }
+
+        [JsonIgnore]
+        public DateTime TimeStamp { get; set; }
     }
 }
