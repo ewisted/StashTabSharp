@@ -1,4 +1,7 @@
+using StashTabSharp.Models;
 using System;
+using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -30,6 +33,25 @@ namespace StashTabSharp.Test.Integration
 
             // Assert
             Assert.NotNull(stashData);
+        }
+
+        [Fact]
+        public async Task GetAsyncDataStream()
+        {
+            // Arrange
+            StashTabClient client = new StashTabClient();
+            var tokenSource = new CancellationTokenSource();
+            tokenSource.CancelAfter(TimeSpan.FromSeconds(10));
+            var data = new List<StashData>();
+
+            // Act
+            await foreach (StashData stashData in client.GetAsyncDataStream().WithCancellation(tokenSource.Token))
+            {
+                data.Add(stashData);
+            }
+
+            // Assert
+            Assert.NotEmpty(data);
         }
     }
 }
