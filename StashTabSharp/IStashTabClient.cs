@@ -13,5 +13,7 @@ namespace StashTabSharp
         Task<StashData> GetAsync(string changeId = "", CancellationToken cancellationToken = default);
 
         IAsyncEnumerable<StashData> GetAsyncDataStream(string changeId = "", TimeSpan requestDelay = default, CancellationToken cancellationToken = default);
+
+        Task GetAsyncDataStreamWithHandler(Action<StashData> action, string changeId = "", TimeSpan requestDelay = default, CancellationToken cancellationToken = default);
     }
 }

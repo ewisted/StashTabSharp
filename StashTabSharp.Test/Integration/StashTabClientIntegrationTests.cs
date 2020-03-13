@@ -48,7 +48,27 @@ namespace StashTabSharp.Test.Integration
             await foreach (StashData stashData in client.GetAsyncDataStream().WithCancellation(tokenSource.Token))
             {
                 data.Add(stashData);
+                break;
             }
+
+            // Assert
+            Assert.NotEmpty(data);
+        }
+
+        [Fact]
+        public async Task GetAsyncDataStreamWithHandler()
+        {
+            // Arrange
+            StashTabClient client = new StashTabClient();
+            var tokenSource = new CancellationTokenSource();
+            tokenSource.CancelAfter(TimeSpan.FromSeconds(5));
+            var data = new List<StashData>();
+
+            // Act
+            await client.GetAsyncDataStreamWithHandler((stashData) =>
+            {
+                data.Add(stashData);
+            }, "", TimeSpan.FromSeconds(1), tokenSource.Token);
 
             // Assert
             Assert.NotEmpty(data);

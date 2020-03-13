@@ -70,7 +70,10 @@ namespace StashTabSharp
             return stashData;
         }
 
-        public async IAsyncEnumerable<StashData> GetAsyncDataStream(string changeId = "", TimeSpan requestDelay = default, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+        public async IAsyncEnumerable<StashData> GetAsyncDataStream(
+            string changeId = "",
+            TimeSpan requestDelay = default,
+            [EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
             if (!string.IsNullOrWhiteSpace(changeId)) 
                 _cachedNextChangeId = changeId;
@@ -88,6 +91,8 @@ namespace StashTabSharp
                 {
                     if (ex.GetType() == typeof(OperationCanceledException))
                         break;
+
+                    // TODO: Handle errors better here. Mabye take in an event handler that allows the user to handle errors as they come up without stopping the stream
                     Console.WriteLine(ex);
                 }
 
@@ -98,6 +103,35 @@ namespace StashTabSharp
                 if (change != null)
                 {
                     yield return change;
+                }
+            }
+        }
+
+        public async Task GetAsyncDataStreamWithHandler(
+            Action<StashData> action,
+            string changeId = "",
+            TimeSpan requestDelay = default,
+            CancellationToken cancellationToken = default)
+        {
+            if (!string.IsNullOrWhiteSpace(changeId))
+                _cachedNextChangeId = changeId;
+            if (requestDelay == default)
+                requestDelay = TimeSpan.FromSeconds(1);
+
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                try
+                {
+                    StashData change = await GetAsync(_cachedNextChangeId, cancellationToken);
+                    action.Invoke(change);
+                }
+                catch (Exception ex)
+                {
+                    if (ex.GetType() == typeof(OperationCanceledException))
+                        break;
+
+                    // TODO: Handle errors better here. Mabye take in an event handler that allows the user to handle errors as they come up without stopping the stream
+                    Console.WriteLine(ex);
                 }
             }
         }
