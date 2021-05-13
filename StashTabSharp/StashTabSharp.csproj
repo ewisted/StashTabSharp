@@ -2,11 +2,26 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <Authors>Eric Wisted</Authors>
+    <Description>A C# client for the Path of Exile Stash Tab API</Description>
+    <Copyright>2021</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/ewisted/StashTabSharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ewisted/StashTabSharp</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>POE, Path of Exile, Stash Tab API</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
     <PackageReference Include="System.Text.Json" Version="4.7.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
