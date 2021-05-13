@@ -12,11 +12,12 @@ jobs:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
       # Checkout the code as the first step.
-      - checkout
+      - checkout:
+          path: ~/StashTabSharp
       # Then simply use the dotnet container as you'd expect and run your tests
       - run:
           # Update this line with the directory that contains your tests project file
-          working_directory: ~/StashTabSharp.Test
+          working_directory: ~/StashTabSharp/StashTabSharp.Test
           name: Run tests
           command: |
             dotnet test
