@@ -20,7 +20,7 @@ namespace StashTabSharp.Models
         public string LastCharacterName { get; set; }
 
         [JsonPropertyName("stash")]
-        public string StashStash { get; set; }
+        public string StashName { get; set; }
 
         [JsonPropertyName("stashType")]
         public string StashType { get; set; }
