@@ -22,9 +22,14 @@ namespace StashTabSharp.Terminal
                 //    .SelectMany(stash => stash.Items
                 //    .Where(item => item.Name == "Headhunter"));
 
-                Console.WriteLine($"Retreived stash: {stashSet.NextChangeId}");
+                Console.WriteLine($"Retreived stash set: {stashSet.NextChangeId}");
+                Console.WriteLine($"Stashes count: {stashSet.Stashes.Count()}");
+                Console.WriteLine($"Quad stashes count: {stashSet.Stashes.Count(x => x.StashType == "QuadStash")}");
+                var tabTypes = stashSet.Stashes.Select(x => x.StashType).Distinct();
+                Console.WriteLine($"Stash types: {string.Join(", ", tabTypes)}");
 
-                foreach(var stash in stashSet.Stashes)
+                var stashSearchList = new [] { "PremiumStash", "QuadStash" };
+                foreach (var stash in stashSet.Stashes.Where(x => stashSearchList.Contains(x.StashType)))
                 {
                     foreach (var item in stash.Items)
                     {
