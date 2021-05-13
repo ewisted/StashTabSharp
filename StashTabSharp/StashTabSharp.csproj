@@ -5,7 +5,7 @@
     <Authors>Eric Wisted</Authors>
     <Description>A C# client for the Path of Exile Stash Tab API</Description>
     <Copyright>2021</Copyright>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/ewisted/StashTabSharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ewisted/StashTabSharp</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\LICENSE">
+    <None Include="..\LICENSE.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
