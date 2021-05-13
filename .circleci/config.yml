@@ -30,7 +30,8 @@ workflows:
   # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
   run-tests: 
     jobs:
-      - build-and-test:
-          filters:
-            branches:
-              ignore: master
+      #- build-and-test:
+      #    filters:
+      #      branches:
+      #        ignore: master
+      - build-and-test
